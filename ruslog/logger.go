@@ -1,12 +1,10 @@
 package ruslog
 
 import (
-	"context"
 	"io"
 	"os"
 	"sync"
 	"sync/atomic"
-	"time"
 )
 
 type Logger struct {
@@ -102,42 +100,42 @@ func (logger *Logger) releaseEntry(entry *Entry) {
 
 // Adds a field to the log entry, note that it doesn't log until you call
 // Debug, Print, Info, Warn, Error, Fatal or Panic. It only creates a log entry.
-// If you want multiple fields, use `WithFields`.
-func (logger *Logger) WithField(key string, value interface{}) *Entry {
-	entry := logger.newEntry()
-	defer logger.releaseEntry(entry)
-	return entry.WithField(key, value)
-}
+// If you want multiple fields, use `WithFields`. todo
+//func (logger *Logger) WithField(key string, value interface{}) *Entry {
+//	entry := logger.newEntry()
+//	defer logger.releaseEntry(entry)
+//	return entry.WithField(key, value)
+//}
 
 // Adds a struct of fields to the log entry. All it does is call `WithField` for
-// each `Field`.
-func (logger *Logger) WithFields(fields Fields) *Entry {
-	entry := logger.newEntry()
-	defer logger.releaseEntry(entry)
-	return entry.WithFields(fields)
-}
+// each `Field`. // todo
+//func (logger *Logger) WithFields(fields Fields) *Entry {
+//	entry := logger.newEntry()
+//	defer logger.releaseEntry(entry)
+//	return entry.WithFields(fields)
+//}
 
 // Add an error as single field to the log entry.  All it does is call
-// `WithError` for the given `error`.
-func (logger *Logger) WithError(err error) *Entry {
-	entry := logger.newEntry()
-	defer logger.releaseEntry(entry)
-	return entry.WithError(err)
-}
+// `WithError` for the given `error`. //todo
+//func (logger *Logger) WithError(err error) *Entry {
+//	entry := logger.newEntry()
+//	defer logger.releaseEntry(entry)
+//	return entry.WithError(err)
+//}
 
-// Add a context to the log entry.
-func (logger *Logger) WithContext(ctx context.Context) *Entry {
-	entry := logger.newEntry()
-	defer logger.releaseEntry(entry)
-	return entry.WithContext(ctx)
-}
+// Add a context to the log entry. todo
+//func (logger *Logger) WithContext(ctx context.Context) *Entry {
+//	entry := logger.newEntry()
+//	defer logger.releaseEntry(entry)
+//	return entry.WithContext(ctx)
+//}
 
-// Overrides the time of the log entry.
-func (logger *Logger) WithTime(t time.Time) *Entry {
-	entry := logger.newEntry()
-	defer logger.releaseEntry(entry)
-	return entry.WithTime(t)
-}
+// Overrides the time of the log entry. //todo
+//func (logger *Logger) WithTime(t time.Time) *Entry {
+//	entry := logger.newEntry()
+//	defer logger.releaseEntry(entry)
+//	return entry.WithTime(t)
+//}
 
 func (logger *Logger) Logf(level Level, format string, args ...interface{}) {
 	if logger.IsLevelEnabled(level) {

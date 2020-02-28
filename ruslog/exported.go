@@ -1,7 +1,6 @@
 package ruslog
 
 import (
-	"context"
 	"io"
 )
 
@@ -55,10 +54,10 @@ func AddHook(hook Hook) {
 //	return std.WithField(ErrorKey, err)
 //}
 
-// WithContext creates an entry from the standard logger and adds a context to it.
-func WithContext(ctx context.Context) *Entry {
-	return std.WithContext(ctx)
-}
+// WithContext creates an entry from the standard logger and adds a context to it. todo
+//func WithContext(ctx context.Context) *Entry {
+//	return std.WithContext(ctx)
+//}
 
 // WithField creates an entry from the standard logger and adds a field to
 // it. If you want multiple fields, use `WithFields`.

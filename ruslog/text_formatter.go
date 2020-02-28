@@ -289,14 +289,15 @@ func (f *TextFormatter) printColored(b *bytes.Buffer, entry *Entry, keys []strin
 	}
 }
 
+// todo
+/*
 func (f *TextFormatter) needsQuoting(text string) bool {
-	// todo
-	//if f.ForceQuote {
-	//	return true
-	//}
-	//if f.QuoteEmptyFields && len(text) == 0 {
-	//	return true
-	//}
+	if f.ForceQuote {
+		return true
+	}
+	if f.QuoteEmptyFields && len(text) == 0 {
+		return true
+	}
 	for _, ch := range text {
 		if !((ch >= 'a' && ch <= 'z') ||
 			(ch >= 'A' && ch <= 'Z') ||
@@ -307,6 +308,7 @@ func (f *TextFormatter) needsQuoting(text string) bool {
 	}
 	return false
 }
+*/
 
 func (f *TextFormatter) appendKeyValue(b *bytes.Buffer, key string, value interface{}) {
 	if b.Len() > 0 {

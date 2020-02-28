@@ -5,7 +5,6 @@ import (
 	"context"
 	"fmt"
 	"os"
-	"reflect"
 	"runtime"
 	"strings"
 	"sync"
@@ -101,66 +100,66 @@ func (entry *Entry) String() (string, error) {
 	return str, nil
 }
 
-// Add an error as single field (using the key defined in ErrorKey) to the Entry.
-func (entry *Entry) WithError(err error) *Entry {
-	return entry.WithField(ErrorKey, err)
-}
+// Add an error as single field (using the key defined in ErrorKey) to the Entry. todo
+//func (entry *Entry) WithError(err error) *Entry {
+//	return entry.WithField(ErrorKey, err)
+//}
 
-// Add a context to the Entry.
-func (entry *Entry) WithContext(ctx context.Context) *Entry {
-	dataCopy := make(Fields, len(entry.Data))
-	for k, v := range entry.Data {
-		dataCopy[k] = v
-	}
-	return &Entry{Logger: entry.Logger, Data: dataCopy, Time: entry.Time, err: entry.err, Context: ctx}
-}
+// Add a context to the Entry. todo
+//func (entry *Entry) WithContext(ctx context.Context) *Entry {
+//	dataCopy := make(Fields, len(entry.Data))
+//	for k, v := range entry.Data {
+//		dataCopy[k] = v
+//	}
+//	return &Entry{Logger: entry.Logger, Data: dataCopy, Time: entry.Time, err: entry.err, Context: ctx}
+//}
 
-// Add a single field to the Entry.
-func (entry *Entry) WithField(key string, value interface{}) *Entry {
-	return entry.WithFields(Fields{key: value})
-}
+// Add a single field to the Entry. todo
+//func (entry *Entry) WithField(key string, value interface{}) *Entry {
+//	return entry.WithFields(Fields{key: value})
+//}
 
-// Add a map of fields to the Entry.
-func (entry *Entry) WithFields(fields Fields) *Entry {
-	entry.Logger.mu.Lock()
-	defer entry.Logger.mu.Unlock()
-	data := make(Fields, len(entry.Data)+len(fields))
-	for k, v := range entry.Data {
-		data[k] = v
-	}
-	fieldErr := entry.err
-	for k, v := range fields {
-		isErrField := false
-		if t := reflect.TypeOf(v); t != nil {
-			switch t.Kind() {
-			case reflect.Func:
-				isErrField = true
-			case reflect.Ptr:
-				isErrField = t.Elem().Kind() == reflect.Func
-			}
-		}
-		if isErrField {
-			tmp := fmt.Sprintf("can not add field %q", k)
-			if fieldErr != "" {
-				fieldErr = entry.err + ", " + tmp
-			} else {
-				fieldErr = tmp
-			}
-		} else {
-			data[k] = v
-		}
-	}
-	return &Entry{Logger: entry.Logger, Data: data, Time: entry.Time, err: fieldErr, Context: entry.Context}
-}
+// Add a map of fields to the Entry. todo
+//func (entry *Entry) WithFields(fields Fields) *Entry {
+//	entry.Logger.mu.Lock()
+//	defer entry.Logger.mu.Unlock()
+//	data := make(Fields, len(entry.Data)+len(fields))
+//	for k, v := range entry.Data {
+//		data[k] = v
+//	}
+//	fieldErr := entry.err
+//	for k, v := range fields {
+//		isErrField := false
+//		if t := reflect.TypeOf(v); t != nil {
+//			switch t.Kind() {
+//			case reflect.Func:
+//				isErrField = true
+//			case reflect.Ptr:
+//				isErrField = t.Elem().Kind() == reflect.Func
+//			}
+//		}
+//		if isErrField {
+//			tmp := fmt.Sprintf("can not add field %q", k)
+//			if fieldErr != "" {
+//				fieldErr = entry.err + ", " + tmp
+//			} else {
+//				fieldErr = tmp
+//			}
+//		} else {
+//			data[k] = v
+//		}
+//	}
+//	return &Entry{Logger: entry.Logger, Data: data, Time: entry.Time, err: fieldErr, Context: entry.Context}
+//}
 
-// Overrides the time of the Entry.
-func (entry *Entry) WithTime(t time.Time) *Entry {
-	dataCopy := make(Fields, len(entry.Data))
-	for k, v := range entry.Data {
-		dataCopy[k] = v
-	}
-	return &Entry{Logger: entry.Logger, Data: dataCopy, Time: t, err: entry.err, Context: entry.Context}
-}
+// Overrides the time of the Entry. todo
+//func (entry *Entry) WithTime(t time.Time) *Entry {
+//	dataCopy := make(Fields, len(entry.Data))
+//	for k, v := range entry.Data {
+//		dataCopy[k] = v
+//	}
+//	return &Entry{Logger: entry.Logger, Data: dataCopy, Time: t, err: entry.err, Context: entry.Context}
+//}
 
 // getPackageName reduces a fully qualified function name to the package name
 // There really ought to be to be a better way...

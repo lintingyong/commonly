@@ -137,9 +137,9 @@ type StdLogger interface {
 
 // The FieldLogger interface generalizes the Entry and Logger types
 type FieldLogger interface {
-	WithField(key string, value interface{}) *Entry
-	WithFields(fields Fields) *Entry
-	WithError(err error) *Entry
+	//WithField(key string, value interface{}) *Entry
+	//WithFields(fields Fields) *Entry
+	//WithError(err error) *Entry
 
 	Debugf(format string, args ...interface{})
 	Infof(format string, args ...interface{})
